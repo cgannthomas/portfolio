@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Siji Ann Thomas — Senior Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #faf8f4;
+    --white: #ffffff;
+    --ink: #1a1814;
+    --ink-light: #4a4740;
+    --ink-muted: #9a9590;
+    --accent: #2d6a4f;
+    --accent-light: #52b788;
+    --accent-pale: #d8f3dc;
+    --rule: #e8e4dd;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 60px;
+  }
+  .hero-left {
+    padding: 80px 48px 80px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--rule);
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-pale);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--ink-light);
+    line-height: 1.75;
+    max-width: 440px;
+    margin-bottom: 44px;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #245a42; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--rule);
+    color: var(--ink-light);
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    background: white;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  .hero-right {
+    padding: 80px 80px 80px 48px;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 28px;
+  }
+  .hero-photo-area {
+    display: flex; justify-content: center; margin-bottom: 8px;
+  }
+  .photo-frame {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    border: 3px solid var(--rule);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--accent-pale), var(--rule));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 16px;
+  }
+  .photo-placeholder svg { opacity: 0.5; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 20px 22px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .stat-card:hover { border-color: var(--accent-light); transform: translateY(-2px); }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+  .hero-location {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    padding: 0 2px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 80px; }
+  section:nth-child(even) { background: white; }
+
+  .section-header {
+    display: flex; align-items: baseline; gap: 20px;
+    margin-bottom: 56px;
+  }
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-muted);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    margin-left: 8px;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .skill-group {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 28px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  section:nth-child(even) .skill-group { background: var(--cream); }
+  .skill-group:hover {
+    border-color: var(--accent-light);
+    box-shadow: 0 4px 20px rgba(45,106,79,0.08);
+  }
+  .skill-group-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .skill-tag {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    color: var(--ink-light);
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+  section:nth-child(even) .skill-tag { background: white; }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--rule);
+  }
+  .timeline-item {
+    padding-left: 36px;
+    position: relative;
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateY(0); }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 8px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--cream);
+  }
+  section:nth-child(even) .timeline-item::before { border-color: white; }
+  .timeline-period {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .timeline-role {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .timeline-company {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+  .timeline-bullets { list-style: none; }
+  .timeline-bullets li {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    padding: 5px 0 5px 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent-light);
+    font-size: 0.8rem;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .project-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 32px;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  section:nth-child(even) .project-card { background: var(--cream); }
+  .project-card:hover {
+    border-color: var(--accent-light);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(45,106,79,0.1);
+  }
+  .project-type {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+  .project-stack {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 20px;
+  }
+  .project-stack span {
+    font-size: 0.72rem;
+    background: var(--accent-pale);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    margin-top: auto;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 10px; }
+  .project-link.disabled {
+    color: var(--ink-muted);
+    pointer-events: none;
+  }
+
+  /* ── CONTACT ── */
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-headline {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .contact-headline em { font-style: italic; color: var(--accent); }
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    margin-bottom: 44px;
+    line-height: 1.7;
+  }
+  .contact-links {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 48px;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 14px 22px;
+    text-decoration: none;
+    color: var(--ink-light);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .contact-item:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .availability-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-pale);
+    border: 1px solid var(--accent-light);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 100px;
+  }
+  .availability-badge::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 28px 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--cream);
+  }
+  .footer-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+  .footer-note {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { gap: 20px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left {
+      padding: 60px 24px 40px;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-right { padding: 40px 24px 60px; }
+    section { padding: 64px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .nav-links { display: none; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Siji Ann Thomas</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-tag">Available · Immediate Joiner</div>
+    <h1 class="hero-name">Siji <em>Ann</em><br>Thomas</h1>
+    <p class="hero-title">Senior Backend Developer</p>
+    <p class="hero-desc">
+      6+ years building production backends — food ordering platforms, e-learning systems, job portals, and enterprise tools. Specialist in Laravel &amp; PHP, actively shipping Node.js APIs in production.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#projects" class="btn-outline">View Projects</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-area">
+      <div class="photo-frame">
+        <div class="photo-placeholder">
+          <!-- <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Add your<br>photo here -->
+          <img src="C:\Users\cgann\Desktop\Siji.jpg" alt="Siji Ann Thomas" style="width:128%; height:128%; object-fit:fill;">
+        </div>
+      </div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">6+</div>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Projects shipped</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">30%</div>
+        <div class="stat-label">Bug reduction achieved</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Backend ecosystems</div>
+      </div>
+    </div>
+    <div class="hero-location">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Palakkad, Kerala, India · Open to Onsite Kerala & Remote
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Tech Stack</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group fade-in">
+      <div class="skill-group-label">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-label">Backend Frameworks</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Laravel</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Express.js</span>
+        <span class="skill-tag">Symfony</span>
+        <span class="skill-tag">CakePHP</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-label">Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Query Optimisation</span>
+        <span class="skill-tag">Redis</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-label">API & Auth</div>
+      <div class="skill-tags">
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">JWT</span>
+        <span class="skill-tag">OAuth</span>
+        <span class="skill-tag">Passport</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-label">Architecture</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MVC</span>
+        <span class="skill-tag">Microservices</span>
+        <span class="skill-tag">Modular Routing</span>
+        <span class="skill-tag">Middleware Design</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-label">Cloud & Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Google Cloud</span>
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">CI/CD</span>
+        <span class="skill-tag">Postman</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-label">Integrations</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Razorpay</span>
+        <span class="skill-tag">OneSignal</span>
+        <span class="skill-tag">GreenAds</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-label">Practices</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Agile / Scrum</span>
+        <span class="skill-tag">Code Review</span>
+        <span class="skill-tag">Unit Testing</span>
+        <span class="skill-tag">JIRA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-period">Aug 2025 – Jan 2026</div>
+      <div class="timeline-role">Sr. Laravel Developer</div>
+      <div class="timeline-company">DDDKing Netline Pvt Ltd · Contract</div>
+      <ul class="timeline-bullets">
+        <li>Engineered core features for a high-traffic food ordering platform serving 10,000+ daily users</li>
+        <li>Reduced production bugs by 30% through proactive backend defect identification and resolution</li>
+        <li>Contributed to full platform revamp improving user experience and backend performance</li>
+        <li>Delivered scalable backend solutions within agile sprint cycles on tight timelines</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-period">January 2023 – August  2025</div>
+      <div class="timeline-role">Freelance Backend Developer & Independent Study</div>
+      <div class="timeline-company">Independent</div>
+      <ul class="timeline-bullets">
+        <li>Developed freelance client projects and personal portfolio work in Node.js/Express.js; deepened expertise in MongoDB, JWT authentication, and modular API architecture. </li>
+        <li>Focused on expanding backend expertise into Node.js, Express.js, and MongoDB; built portfolio APIs and prepared for senior-level opportunities.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-period">Jun 2023 – Dec 2023</div>
+      <div class="timeline-role">Career Break</div>
+      <div class="timeline-company">Maternity Leave</div>
+      <ul class="timeline-bullets">
+        <li>Returned to backend development with renewed focus and expanded into Node.js ecosystem</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-period">Mar 2023 – May 2023</div>
+      <div class="timeline-role">Sr. Laravel Developer</div>
+      <div class="timeline-company">dMACQ Software Pvt Ltd · Contract</div>
+      <ul class="timeline-bullets">
+        <li>Migrated legacy Core PHP application to Laravel, reducing technical debt by ~40%</li>
+        <li>Restructured codebase using MVC architecture, improving maintainability and developer productivity</li>
+        <li>Optimised application performance reducing average API response time by ~35%</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-period">Feb 2020 – Dec 2022</div>
+      <div class="timeline-role">Sr. Laravel Developer</div>
+      <div class="timeline-company">WebandCrafts</div>
+      <ul class="timeline-bullets">
+        <li>Architected RESTful APIs for multiple web and mobile applications with JWT authentication</li>
+        <li>Built end-to-end backend for MyIelts Partner — an IELTS e-learning platform (web + mobile)</li>
+        <li>Integrated Razorpay payment gateway processing live transactions and OneSignal push notifications</li>
+        <li>Designed normalised database schemas and optimised complex MySQL queries</li>
+        <li>Deployed applications on Google Cloud via GitLab CI/CD pipelines</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-period">Apr 2017 – Nov 2019</div>
+      <div class="timeline-role">Jr. Laravel / PHP Developer</div>
+      <div class="timeline-company">Vaibhav Global Pvt Ltd</div>
+      <ul class="timeline-bullets">
+        <li>Developed and maintained frontend and backend components for enterprise applications</li>
+        <li>Worked across Symfony and Laravel frameworks on multiple product lines</li>
+        <li>Built foundational skills in PHP, database design, and agile team collaboration</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in">
+      <div class="project-type">E-Learning · Web & Mobile</div>
+      <div class="project-name">MyIelts Partner</div>
+      <p class="project-desc">End-to-end backend for an IELTS preparation platform — user auth, course management, live payment integration, and push notifications for web and mobile users.</p>
+      <div class="project-stack">
+        <span>Laravel</span><span>MySQL</span><span>Razorpay</span><span>OneSignal</span><span>Google Cloud</span>
+      </div>
+      <a href="https://myedtekpartner.com/" target="_blank" class="project-link">View Live →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-type">Job Portal · Web</div>
+      <div class="project-name">ERAS Teachers</div>
+      <p class="project-desc">Full backend for a dedicated job platform for teachers — job listings, application flows, and payment modules built for the education sector.</p>
+      <div class="project-stack">
+        <span>Laravel</span><span>MySQL</span><span>Razorpay</span><span>GreenAds</span>
+      </div>
+      <a href="https://erasteachers.com/" target="_blank" class="project-link">View Live →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-type">Live Gaming · Mobile</div>
+      <div class="project-name">Keralavision Shopping Challenge</div>
+      <p class="project-desc">Real-time gaming logic and high-throughput data pipelines for a mobile app, using MongoDB for flexible schema design under live traffic conditions.</p>
+      <div class="project-stack">
+        <span>Laravel</span><span>MongoDB</span><span>GitLab</span>
+      </div>
+      <span class="project-link disabled">Internal App</span>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-type">Node.js · Portfolio API</div>
+      <div class="project-name">REST API — Node.js</div>
+      <p class="project-desc">Production-ready RESTful API built with modular routing, JWT authentication, centralised error handling, role-based access control, and environment-based config management.</p>
+      <div class="project-stack">
+        <span>Node.js</span><span>Express.js</span><span>MongoDB</span><span>JWT</span>
+      </div>
+      <a href="https://github.com/cgannthomas" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-type">Enterprise · HR Platform</div>
+      <div class="project-name">ESOP</div>
+      <p class="project-desc">Employee Stock Ownership Plan management system — stock tracking, vesting schedules, and reporting modules for an internal enterprise HR platform.</p>
+      <div class="project-stack">
+        <span>Laravel</span><span>MySQL</span><span>JIRA</span>
+      </div>
+      <span class="project-link disabled">Internal Tool</span>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-type">Enterprise · Inventory</div>
+      <div class="project-name">EIndent</div>
+      <p class="project-desc">Online store management system with inventory control, order management, and user administration built on Symfony for internal operational use.</p>
+      <div class="project-stack">
+        <span>Symfony</span><span>MySQL</span><span>JIRA</span>
+      </div>
+      <span class="project-link disabled">Internal Tool</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background: white;">
+  <div class="contact-inner fade-in">
+    <h2 class="contact-headline">Let's build something <em>together</em></h2>
+    <p class="contact-sub">Open to Senior Backend Developer roles — onsite in Kerala or fully remote. Available to join immediately.</p>
+    <div class="contact-links">
+      <a href="mailto:cgann02@gmail.com" class="contact-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        cgann02@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/cgann02" target="_blank" class="contact-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/cgann02
+      </a>
+      <a href="https://github.com/cgannthomas" target="_blank" class="contact-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        github.com/cgannthomas
+      </a>
+    </div>
+    <div class="availability-badge">Available for immediate joining</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Siji Ann Thomas</span>
+  <span class="footer-note">Senior Backend Developer · Palakkad, Kerala</span>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in, .timeline-item').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
